@@ -1,0 +1,24 @@
+:root {
+
+  /* CSS: .bg-gradient { background: var(--gradient) } */
+  --clr-bg-base: #ffffff;
+  --clr-bg-soft: #eaeefb;
+  --clr-bg-light: #d6ddf6;
+  --clr-bg-muted: #c1cdf2;
+  --clr-surface-light: #acbded;
+  --clr-surface: #96ade8;
+  --clr-surface-mid: #7f9de3;
+  --clr-accent-light: #668ede;
+  --clr-accent: #497fd9;
+  --clr-primary: #1c71d4;
+  --clr-primary-dark: #2064ba;
+  --clr-primary-darker: #2157a1;
+  --clr-deep-blue: #214b88;
+  --clr-navy: #203e70;
+  --clr-navy-dark: #1d3359;
+  --clr-ink: #192743;
+  --clr-ink-dark: #151d2e;
+  --clr-void: #0e111b;
+  --clr-black: #000000;
+
+}
