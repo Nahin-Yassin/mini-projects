@@ -1,18 +1,21 @@
+<style scoped></style>
 <script setup>
-import HomeView from '../src/views/HomeView.vue'
-import Layout from './components/Layout/Layout.vue'
-import Calculator from './components/mini-projects/Calculator.vue'
-import FlipCoin from './components/mini-projects/FlipCoin.vue'
-import TicTac from './components/mini-projects/TicTac.vue'
+import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <Layout>
-    <HomeView />
-    <FlipCoin />
-    <Calculator />
-    <TicTac />
-  </Layout>
-</template>
+  <header>
+    <nav>
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/about">About</RouterLink>
+    </nav>
+  </header>
 
-<style scoped></style>
+  <main>
+    <RouterView />
+  </main>
+
+  <footer>
+    <h1>Footer</h1>
+  </footer>
+</template>
