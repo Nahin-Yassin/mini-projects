@@ -1,39 +1,55 @@
 <script>
-import { ref } from 'vue'
-const tics = ref({
-  aA: '',
-  aB: '',
-  ac: '',
-  bA: '',
-  bB: '',
-  bc: '',
-  cA: '',
-  cB: '',
-  cC: '',
-})
-const player = ref('one')
-const gameOver = ref('')
+import { ref, computed } from 'vue'
 
-const handleReset = () => {
-  tics.value = {
-    aA: '',
-    aB: '',
-    ac: '',
-    bA: '',
-    bB: '',
-    bc: '',
-    cA: '',
-    cB: '',
-    cC: '',
+const player = ref('X')
+const board = ref([
+  ['', '', ''],
+  ['', '', ''],
+  ['', '', ''],
+])
+
+const CalculateWinner = (board) => {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ]
+
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i]
+
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return board[a]
+    }
   }
-  player.value = 'One'
-  gameOver.value = ''
+
+  return null
 }
 
-const checkStatus = () => {
-  const checkAllEmpties = Object.entries(tics.value)
-    .flatMap((entry) => entry[1])
-    .filter((entry) => entry === '')
+const winner = computed(() => CalculateWinner(board.value.flat()))
+
+const MakeMove = (x, y) => {
+  if (winner.value) return
+
+  if (board.value[x][y]) return
+
+  board.value[x][y] = player.value
+
+  player.value = player.value === 'X' ? 'O' : 'X'
+}
+
+const ResetGame = () => {
+  board.value = [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', ''],
+  ]
+  player.value = 'X'
 }
 </script>
 <template>
@@ -51,8 +67,10 @@ const checkStatus = () => {
     <div class="square" id="square7"></div>
     <div class="square" id="square8"></div>
   </div>
+
+  <div id="board">{{ board }}</div>
   <div id="endGame">
-    <input type="button" value="Restart" id="restartButton" onclick="restartButton()" />
+    <button class="reset" @click="ResetGame">Reset</button>
   </div>
 </template>
 <style>
@@ -65,9 +83,8 @@ h1 {
   margin-right: auto;
   width: 375px;
   height: 375px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 5px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .square {
@@ -85,7 +102,7 @@ h1 {
   background-color: #ffffe0;
 }
 
-#restartButton {
+.reset {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -97,7 +114,7 @@ h1 {
   font-size: 18px;
 }
 
-#restartButton:hover {
+.reset:hover {
   background-color: #000000;
   color: #ffffff;
 }
