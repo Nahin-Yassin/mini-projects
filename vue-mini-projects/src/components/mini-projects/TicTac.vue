@@ -1,4 +1,41 @@
-<script></script>
+<script>
+import { ref } from 'vue'
+const tics = ref({
+  aA: '',
+  aB: '',
+  ac: '',
+  bA: '',
+  bB: '',
+  bc: '',
+  cA: '',
+  cB: '',
+  cC: '',
+})
+const player = ref('one')
+const gameOver = ref('')
+
+const handleReset = () => {
+  tics.value = {
+    aA: '',
+    aB: '',
+    ac: '',
+    bA: '',
+    bB: '',
+    bc: '',
+    cA: '',
+    cB: '',
+    cC: '',
+  }
+  player.value = 'One'
+  gameOver.value = ''
+}
+
+const checkStatus = () => {
+  const checkAllEmpties = Object.entries(tics.value)
+    .flatMap((entry) => entry[1])
+    .filter((entry) => entry === '')
+}
+</script>
 <template>
   <div id="title">
     <h1>Tic Tac Toe</h1>
