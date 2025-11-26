@@ -1,4 +1,34 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+const winner = ref()
+const cells = {
+  1: '',
+  2: '',
+  3: '',
+  4: '',
+  5: '',
+  6: '',
+  7: '',
+  8: '',
+  9: '',
+}
+const reset = () => {
+  cells.value = {
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+    5: '',
+    6: '',
+    7: '',
+    8: '',
+    9: '',
+  }
+}
+const handleClick = () => {
+  const player = ref('X')
+}
+</script>
 <template>
   <div class="board">
     <div class="box box1" @click="handleClick(1)">{{ cells[1] }}</div>
