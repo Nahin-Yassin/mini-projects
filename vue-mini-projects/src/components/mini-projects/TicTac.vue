@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-const winner = ref()
-const cells = {
+const winner = ref('')
+const cells = ref({
   1: '',
   2: '',
   3: '',
@@ -11,9 +11,18 @@ const cells = {
   7: '',
   8: '',
   9: '',
+})
+
+const player = ref('X')
+
+function handleClick(num) {
+  if (cells.value[num] !== '') return
+  cells.value[num] = player.value
+  checkWinner()
+  player.value = player.value === 'X' ? 'O' : 'X'
 }
 const reset = () => {
-  cells.value = {
+  ;((cells.value = {
     1: '',
     2: '',
     3: '',
@@ -23,10 +32,30 @@ const reset = () => {
     7: '',
     8: '',
     9: '',
-  }
+  }),
+    (winner.value = ''))
 }
-const handleClick = () => {
-  const player = ref('X')
+
+const checkWinner = () => {
+  const c = cells.value
+
+  if (c[1] && c[1] === c[2] && c[2] === c[3]) {
+    winner.value = `${c[1]} wins`
+  } else if (c[4] && c[4] === c[5] && c[5] === c[6]) {
+    winner.value = `${c[4]} wins`
+  } else if (c[7] && c[7] === c[8] && c[8] === c[9]) {
+    winner.value = `${c[7]} wins`
+  } else if (c[1] && c[1] === c[4] && c[4] === c[7]) {
+    winner.value = `${c[1]} wins`
+  } else if (c[2] && c[2] === c[5] && c[5] === c[8]) {
+    winner.value = `${c[2]} wins`
+  } else if (c[3] && c[3] === c[6] && c[6] === c[9]) {
+    winner.value = `${c[3]} wins`
+  } else if (c[1] && c[1] === c[5] && c[5] === c[9]) {
+    winner.value = `${c[1]} wins`
+  } else if (c[3] && c[3] === c[5] && c[5] === c[7]) {
+    winner.value = `${c[3]} wins`
+  }
 }
 </script>
 <template>
@@ -83,7 +112,6 @@ const handleClick = () => {
 
 button {
   display: block;
-  margin: 20px auto;
   padding: 10px 25px;
   font-size: 16px;
   cursor: pointer;
@@ -102,7 +130,7 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 450px;
+  bottom: 440px;
 }
 .popuptext {
   display: flex;
