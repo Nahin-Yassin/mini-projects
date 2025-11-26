@@ -94,14 +94,14 @@ const checkWinner = () => {
 .box {
   width: 100px;
   height: 100px;
-  background-color: var(--clr-bg-soft); /* lighter background */
-  border: 2px solid var(--clr-accent); /* use accent color for border */
+  background-color: var(--clr-bg-soft);
+  border: 2px solid var(--clr-accent);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 40px;
   font-weight: bold;
-  color: var(--clr-navy-dark); /* color for X and O */
+  color: var(--clr-navy-dark);
   cursor: pointer;
   transition:
     background-color 0.2s,
@@ -135,7 +135,7 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 470px;
+  bottom: 450px;
 }
 .popuptext {
   display: flex;
@@ -145,8 +145,6 @@ button:hover {
   height: 350px;
   background-color: var(--clr-accent);
   color: var(--clr-bg-base);
-  padding: 10px 20px;
-  border-radius: 6px;
   font-weight: bold;
   font-size: 35px;
   animation: fadeIn 0.5s ease;
