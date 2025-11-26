@@ -23,9 +23,49 @@ function show(name) {
   </div>
 </template>
 
-<style scoped>
+<style>
+/* Layout */
 button {
-  width: 200px;
-  height: 250px;
+  width: 160px;
+  padding: 14px 0;
+  margin: 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+
+  background: var(--clr-surface); /* Light blue button */
+  color: var(--clr-ink-dark); /* Dark blue text */
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+button:hover {
+  background: var(--clr-accent); /* Slightly darker blue on hover */
+  transform: translateY(-2px);
+}
+
+button:active {
+  background: var(--clr-accent-light);
+  transform: translateY(0);
+}
+
+.viewer {
+  margin-top: 20px;
+  padding: 20px;
+
+  background: var(--clr-bg-soft); /* Soft background */
+  border: 1px solid var(--clr-bg-light);
+  border-radius: 10px;
+
+  min-height: 380px;
+}
+
+/* Center whatever component is shown */
+.viewer > * {
+  margin: auto;
 }
 </style>

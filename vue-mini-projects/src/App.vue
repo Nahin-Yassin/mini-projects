@@ -19,3 +19,8 @@ import { RouterLink, RouterView } from 'vue-router'
     <h1>Footer</h1>
   </footer>
 </template>
+<style>
+* {
+  font-family: 'Varela', sans-serif;
+}
+</style>
