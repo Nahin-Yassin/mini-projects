@@ -13,7 +13,7 @@ function flipCoin() {
   const side = Math.random() < 0.5 ? 0 : 1
 
   // Random full rotations (3-5 turns)
-  const turns = Math.floor(Math.random() * 3) + 3
+  const turns = Math.floor(Math.random() * 3)
 
   // Final rotation in deg
   // Heads = 0deg, Tails = 180deg
@@ -53,10 +53,12 @@ function easeOutCubic(t) {
 
 <style scoped>
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border: 2px solid var(--clr-accent);
   height: 50vh;
+  width: 450px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   flex-direction: column;
 }
 .coin {
@@ -82,12 +84,37 @@ function easeOutCubic(t) {
 }
 
 .coin::before {
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   content: ' Heads ';
+  background-color: gold;
 }
 
 .coin::after {
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: silver; /* tails */
   transform: rotateY(180deg);
   content: ' Tails ';
+}
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: var(--clr-primary);
+  color: var(--clr-bg-base);
+  border: none;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: var(--clr-primary-dark);
 }
 </style>
