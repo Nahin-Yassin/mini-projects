@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import Calculator from '../components/mini-projects/Calculator.vue'
 import FlipCoin from '../components/mini-projects/FlipCoin.vue'
 import TicTac from '../components/mini-projects/TicTac.vue'
+import Flipcoin2 from '@/components/mini-projects/flipcoin2.vue'
 
 const active = ref(null)
 
@@ -15,11 +16,13 @@ function show(name) {
   <button @click="show('Calculator')">Calculator</button>
   <button @click="show('FlipCoin')">Flip Coin</button>
   <button @click="show('TicTac')">TicTac</button>
+  <button @click="show('Flipcoin2')">Flipcoin2</button>
 
   <div class="viewer">
     <Calculator v-if="active === 'Calculator'" />
     <FlipCoin v-if="active === 'FlipCoin'" />
     <TicTac v-if="active === 'TicTac'" />
+    <Flipcoin2 v-if="active === 'Flipcoin2'" />
   </div>
 </template>
 
