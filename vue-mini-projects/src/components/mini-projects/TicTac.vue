@@ -59,6 +59,8 @@ const checkWinner = () => {
 }
 </script>
 <template>
+  <h1>TicTacToe</h1>
+
   <div class="board">
     <div class="box box1" @click="handleClick(1)">{{ cells[1] }}</div>
     <div class="box box2" @click="handleClick(2)">{{ cells[2] }}</div>
