@@ -1,4 +1,6 @@
 <script setup>
+import TresCoin from './tres/TresCoin.vue'
+
 import { ref } from 'vue'
 const num = ref('')
 function flip() {
@@ -18,6 +20,7 @@ function flip() {
       <div class="button"><button @click="flip">Flip</button></div>
     </div>
   </div>
+  <TresCoin />
 </template>
 <style>
 .container {
