@@ -1,25 +1,21 @@
 <script setup>
 import { ref } from 'vue'
 
-const rotation = ref(0) // current rotation in deg
-const spinning = ref(false) // is coin spinning?
+const rotation = ref(0)
+const spinning = ref(false)
 
 function flipCoin() {
-  if (spinning.value) return // prevent double flip
+  if (spinning.value) return
 
   spinning.value = true
 
-  // Decide random side: 0 = heads, 1 = tails
   const side = Math.random() < 0.5 ? 0 : 1
 
-  // Random full rotations (3-5 turns)
   const turns = Math.floor(Math.random() * 3)
 
-  // Final rotation in deg
-  // Heads = 0deg, Tails = 180deg
   const finalDeg = turns * 360 + side * 180
 
-  const duration = 2000 // animation time in ms
+  const duration = 2000
   const start = performance.now()
   const startRot = rotation.value
 

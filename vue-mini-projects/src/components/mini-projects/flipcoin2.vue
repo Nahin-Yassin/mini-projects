@@ -22,7 +22,7 @@ function flip() {
   </div>
   <TresCoin />
 </template>
-<style>
+<style scoped>
 .container {
   border: 2px solid var(--clr-accent);
   height: 50vh;
