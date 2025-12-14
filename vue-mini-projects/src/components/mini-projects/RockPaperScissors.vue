@@ -1,32 +1,60 @@
 <script setup>
-import { reactive, ref } from 'vue'
-const rock = 'Rock'
-const paper = 'Paper'
-const scissors = 'Scissors'
+import { ref } from 'vue'
 
-function rpsLogic() {
-  if (rock === scissors) {
-    console.log('scissors wins')
-  } if (rock === paper) {
-    console.log('paper wins')
-  } else { console.log("draw")
+const moves = ref(['rock', 'paper', 'scissors'])
+const plays = ref('')
+const pcplays = ref(null)
 
+function playerMove(move) {
+  plays.value = move
+}
+function computerMove() {
+  const randomNumber = Math.floor(Math.random() * 3)
+  const pcmove = randomNumber === 0 ? 'rock' : randomNumber === 1 ? 'paper' : 'scissors'
+  pcplays.value = pcmove
+}
+function choseWinner() {
+  if (condition) {
   }
+  if (condition) {
+  } else {
+  }
+}
+function game() {
+  computerMove()
+}
 </script>
 <template>
   <div class="container">
-    <button>Rock</button>
-    <button>Paper</button>
-    <button>Scissors</button>
+    <div class="game">
+      <p v-if="plays">player : {{ plays }}</p>
+      <p>Computer :{{ pcplays }}</p>
+    </div>
+    <div class="buttons">
+      <button @click="(playerMove(moves[0]), game())">Rock</button>
+      <button @click="(playerMove(moves[1]), game())">Paper</button>
+      <button @click="(playerMove(moves[2]), game())">Scissors</button>
+    </div>
   </div>
 </template>
 <style scoped>
 .container {
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  justify-content: space-around;
+  flex-direction: column;
   width: 50vh;
   height: 50vh;
   border: solid var(--clr-accent-light);
+}
+.buttons {
+  display: flex;
+  flex-wrap: initial;
+}
+.game {
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 </style>
