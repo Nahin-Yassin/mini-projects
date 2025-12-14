@@ -31,6 +31,7 @@ function show(name) {
 <style>
 /* Layout */
 button {
+  flex-wrap: wrap;
   width: 160px;
   padding: 14px 0;
   margin: 8px;
