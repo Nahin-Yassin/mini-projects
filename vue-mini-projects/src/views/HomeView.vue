@@ -5,6 +5,7 @@ import FlipCoin from '../components/mini-projects/FlipCoin.vue'
 import TicTac from '../components/mini-projects/TicTac.vue'
 import flipcoin2 from '../components/mini-projects/flipcoin2.vue'
 import RockPaperScissors from '../components/mini-projects/RockPaperScissors.vue'
+import Chess from '../components/mini-projects/Chess.vue'
 const active = ref(null)
 
 function show(name) {
@@ -18,6 +19,7 @@ function show(name) {
   <button @click="show('TicTac')">TicTac</button>
   <button @click="show('flipcoin2')">flipcoin2</button>
   <button @click="show('RockPaperScissors')">RPS</button>
+  <button @click="show('Chess')">Chess</button>
 
   <div class="viewer">
     <Calculator v-if="active === 'Calculator'" />
@@ -25,6 +27,7 @@ function show(name) {
     <TicTac v-if="active === 'TicTac'" />
     <flipcoin2 v-if="active === 'flipcoin2'" />
     <RockPaperScissors v-if="active === 'RockPaperScissors'" />
+    <Chess v-if="active === 'Chess'" />
   </div>
 </template>
 
