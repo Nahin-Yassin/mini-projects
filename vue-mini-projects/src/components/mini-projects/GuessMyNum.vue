@@ -13,7 +13,7 @@ function handleInput(e) {
 
 function randNum() {
   if (MaxNum.value > 0) {
-    num.value = Math.floor(Math.random() * MaxNum.value)
+    num.value = Math.floor(Math.random() * MaxNum.value) + 1
     console.log('Random number:', num.value)
   }
 }
