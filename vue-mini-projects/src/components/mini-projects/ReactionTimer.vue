@@ -1,27 +1,45 @@
 <script setup>
 import { ref } from 'vue'
-let waiting = ref(0)
+let isPLaying = ref(false)
+let showBlock = ref(false)
+let reactionTime = ref(0)
 
-function waitingTime(delay = 5500) {
-  waiting = Math.floor(Math.random() * delay) + 3000
-  console.log(waiting)
+let delay = null
+let timer = null
+function start() {
+  delay = 2000 + Math.floor(Math.random() * 5000)
+  isPLaying.value = true
+
   setTimeout(() => {
-    console.log(`Delayed for ${waiting} ms`)
+    showBlock.value = true
+    startTimer()
+    console.log(delay)
   }, delay)
 }
-waitingTime()
+
+function startTimer() {
+  timer = setInterval(() => {
+    reactionTime.value += 10
+  }, 10)
+}
+function stopTimer() {
+  clearInterval(timer)
+  console.log(reactionTime)
+}
 </script>
 <template>
   <div class="container">
-    <p>
-      Reaction time test <br />
-      click below to start
-    </p>
-    <div class="game_box" v-if="waitingTime" @click="waitingTime">
-      <div class="for_green">
-        <p>wait for green</p>
-      </div>
+    <div class="game_box" @click="start">
+      <p>
+        Reaction time test <br />
+        click to start
+      </p>
     </div>
+    <div v-show="isPLaying" class="wait">
+      <p>wait for green</p>
+    </div>
+    <div v-if="showBlock" class="green" @click="stopTimer"><p>Click me fast !</p></div>
+    <p>{{ reactionTime }}ms</p>
   </div>
 </template>
 
@@ -30,23 +48,39 @@ waitingTime()
   width: 500px;
   height: 500px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   flex-direction: column;
   border: solid var(--clr-accent);
 }
 .game_box {
+  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red;
   width: 350px;
   height: 350px;
 }
 
-.for_green {
-  background-color: green;
-  width: 300px;
-  height: 300px;
+.wait {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--clr-accent);
+  width: 350px;
+  height: 350px;
+}
+.green {
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgb(107, 231, 107);
+  width: 350px;
+  height: 350px;
 }
 </style>
