@@ -7,8 +7,9 @@ import flipcoin2 from '../components/mini-projects/flipcoin2.vue'
 import RockPaperScissors from '../components/mini-projects/RockPaperScissors.vue'
 import Chess from '../components/mini-projects/Chess.vue'
 import DotsAndBoxes from '../components/mini-projects/DotsAndBoxes.vue'
-import GuessMyNum from '@/components/mini-projects/GuessMyNum.vue'
-import ReactionTimer from '@/components/mini-projects/ReactionTimer.vue'
+import GuessMyNum from '../components/mini-projects/GuessMyNum.vue'
+import ReactionTimer from '../components/mini-projects/ReactionTimer.vue'
+import Sudoko from '../components/mini-projects/Sudoko.vue'
 const active = ref(null)
 
 function show(name) {
@@ -26,6 +27,7 @@ function show(name) {
   <button @click="show('DotsAndBoxes')">Dots And Boxes</button>
   <button @click="show('GuessMyNum')">Guess my num</button>
   <button @click="show('ReactionTimer')">Reaction Tester</button>
+  <button @click="show('Sudoko')">Sudoko</button>
 
   <div class="viewer">
     <Calculator v-if="active === 'Calculator'" />
@@ -37,6 +39,7 @@ function show(name) {
     <DotsAndBoxes v-if="active === 'DotsAndBoxes'" />
     <GuessMyNum v-if="active === 'GuessMyNum'" />
     <ReactionTimer v-if="active === 'ReactionTimer'" />
+    <Sudoko v-if="active === 'Sudoko'" />
   </div>
 </template>
 
