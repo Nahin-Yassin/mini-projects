@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 
 let i = ref(0)
 const selectedNumber = ref(null)
-const puzzleBoard = ref([
+var puzzleBoard = ref([
   [5, 3, 0, 0, 7, 0, 0, 0, 0],
   [6, 0, 0, 1, 9, 5, 0, 0, 0],
   [0, 9, 8, 0, 0, 0, 0, 6, 0],
@@ -14,7 +14,7 @@ const puzzleBoard = ref([
   [0, 0, 0, 4, 1, 9, 0, 0, 5],
   [0, 0, 0, 0, 8, 0, 0, 7, 9],
 ])
-const solutionBoard = ref([
+var solutionBoard = ref([
   [5, 3, 4, 6, 7, 8, 9, 1, 2],
   [6, 7, 2, 1, 9, 5, 3, 4, 8],
   [1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -28,17 +28,22 @@ const solutionBoard = ref([
 function selectNumber(num) {
   selectedNumber.value = num
 }
-
-for (let r = 0; r < array.length; r++) {
-  const element = array[r]
+function setGame() {
+  for (let r = 0; r < 9; r++) {
+    for (let c = 0; c < 9; c++) {
+      onMounted(() => {
+        let tile = document.createElement('div')
+        tile.id = r.toString() + '-' + c.toString()
+        tile.classList.add('tile')
+        document.getElementById('board').append(tile)
+      })
+    }
+  }
 }
+setGame()
 </script>
 <template>
-  <div class="container">
-    <div v-for="r in 9" class="rBoard">
-      <div v-for="c in 9" class="cBoard"></div>
-    </div>
-  </div>
+  <div id="board" class="container"></div>
   <div class="pNum">
     <div v-for="number in 9" :key="number" class="number" @click="selectNumber(number)">
       {{ number }}
@@ -77,5 +82,10 @@ for (let r = 0; r < array.length; r++) {
 }
 .number:hover {
   background-color: rgba(240, 248, 255, 0.518);
+}
+.tile {
+  width: 20px;
+  height: 20px;
+  border: solid;
 }
 </style>
