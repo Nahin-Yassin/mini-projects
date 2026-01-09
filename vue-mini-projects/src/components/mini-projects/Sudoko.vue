@@ -1,8 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-
-let i = ref(0)
-const selectedNumber = ref(null)
+const selectedNumber = ref()
+const board = Array.from({ length: 9 }, () => Array.from({ length: 9 }, () => ''))
 var puzzleBoard = ref([
   [5, 3, 0, 0, 7, 0, 0, 0, 0],
   [6, 0, 0, 1, 9, 5, 0, 0, 0],
@@ -25,30 +24,33 @@ var solutionBoard = ref([
   [2, 8, 7, 4, 1, 9, 6, 3, 5],
   [3, 4, 5, 2, 8, 6, 1, 7, 9],
 ])
+
 function selectNumber(num) {
   selectedNumber.value = num
 }
-function setGame() {
-  for (let r = 0; r < 9; r++) {
-    for (let c = 0; c < 9; c++) {
-      onMounted(() => {
-        let tile = document.createElement('div')
-        tile.id = r.toString() + '-' + c.toString()
-        tile.classList.add('tile')
-        document.getElementById('board').append(tile)
-      })
-    }
-  }
+function selectTile(r, c) {
+  board[r][c] = selectedNumber.value
 }
-setGame()
 </script>
 <template>
-  <div id="board" class="container"></div>
+  <div id="board" class="container">
+    <div v-for="(row, r) in board" :key="r" class="row">
+      <div
+        v-for="(cell, c) in row"
+        :key="r + '-' + c"
+        class="tile"
+        :id="r + '-' + c"
+        @click="selectTile(r, c)"
+      >
+        {{ cell }} {{ number }}
+      </div>
+    </div>
+  </div>
   <div class="pNum">
     <div v-for="number in 9" :key="number" class="number" @click="selectNumber(number)">
       {{ number }}
-      {{ selectedNumber }}
     </div>
+    {{ selectedNumber }}
   </div>
 </template>
 <style scoped>
@@ -56,17 +58,14 @@ setGame()
   width: 500px;
   height: 500px;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  border: 2px solid var(--clr-accent);
-
-  padding-bottom: 100px;
 }
 
 .pNum {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
   width: 500px;
   height: 50px;
   padding: 10px;
@@ -84,8 +83,10 @@ setGame()
   background-color: rgba(240, 248, 255, 0.518);
 }
 .tile {
-  width: 20px;
-  height: 20px;
-  border: solid;
+  text-align: center;
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  border: 0.5px solid var(--clr-accent);
 }
 </style>
