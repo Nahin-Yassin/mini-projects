@@ -1,9 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 const selectedNumber = ref()
-let number = ref()
 const board = ref(Array.from({ length: 9 }, () => Array.from({ length: 9 }, () => '')))
-var puzzleBoard = ref([
+let puzzleBoard = ref([
   [5, 3, 0, 0, 7, 0, 0, 0, 0],
   [6, 0, 0, 1, 9, 5, 0, 0, 0],
   [0, 9, 8, 0, 0, 0, 0, 6, 0],
@@ -14,6 +13,7 @@ var puzzleBoard = ref([
   [0, 0, 0, 4, 1, 9, 0, 0, 5],
   [0, 0, 0, 0, 8, 0, 0, 7, 9],
 ])
+
 var solutionBoard = ref([
   [5, 3, 4, 6, 7, 8, 9, 1, 2],
   [6, 7, 2, 1, 9, 5, 3, 4, 8],
@@ -28,6 +28,7 @@ var solutionBoard = ref([
 
 function selectNumber(num) {
   selectedNumber.value = num
+  puzzleBoard.value[r][c].splice(0) // valid
 }
 function selectTile(r, c) {
   board.value[r][c] = selectedNumber.value
@@ -43,7 +44,8 @@ function selectTile(r, c) {
         :id="r + '-' + c"
         @click="selectTile(r, c)"
       >
-        {{ cell }}
+        {{ cell !== 0 ? cell : '' }}
+        {{ puzzleBoard[r][c] }}
       </div>
     </div>
   </div>
