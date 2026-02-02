@@ -2,19 +2,19 @@
 import { ref, onMounted } from 'vue'
 const selectedNumber = ref()
 const board = ref(Array.from({ length: 9 }, () => Array.from({ length: 9 }, () => '')))
-let puzzleBoard = ref([
-  [5, 3, 0, 0, 7, 0, 0, 0, 0],
-  [6, 0, 0, 1, 9, 5, 0, 0, 0],
-  [0, 9, 8, 0, 0, 0, 0, 6, 0],
-  [8, 0, 0, 0, 6, 0, 0, 0, 3],
-  [4, 0, 0, 8, 0, 3, 0, 0, 1],
-  [7, 0, 0, 0, 2, 0, 0, 0, 6],
-  [0, 6, 0, 0, 0, 0, 2, 8, 0],
-  [0, 0, 0, 4, 1, 9, 0, 0, 5],
-  [0, 0, 0, 0, 8, 0, 0, 7, 9],
+const puzzleBoard = ref([
+  [5, 3, null, null, 7, null, null, null, null],
+  [6, null, null, 1, 9, 5, null, null, null],
+  [null, 9, 8, null, null, null, null, 6, null],
+  [8, null, null, null, 6, null, null, null, 3],
+  [4, null, null, 8, null, 3, null, null, 1],
+  [7, null, null, null, 2, null, null, null, 6],
+  [null, 6, null, null, null, null, 2, 8, null],
+  [null, null, null, 4, 1, 9, null, null, 5],
+  [null, null, null, null, 8, null, null, 7, 9],
 ])
 
-var solutionBoard = ref([
+const solutionBoard = ref([
   [5, 3, 4, 6, 7, 8, 9, 1, 2],
   [6, 7, 2, 1, 9, 5, 3, 4, 8],
   [1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -26,13 +26,30 @@ var solutionBoard = ref([
   [3, 4, 5, 2, 8, 6, 1, 7, 9],
 ])
 
+function checkGame() {
+  for (let r = 0; r < 9; r++) {
+    for (let c = 0; c < 9; c++) {
+      if (puzzleBoard.value[r][c] !== solutionBoard.value[r][c]) {
+        return
+      }
+    }
+  }
+
+  alert('winner')
+}
+
 function selectNumber(num) {
   selectedNumber.value = num
-  puzzleBoard.value[r][c].splice(0) // valid
 }
 function selectTile(r, c) {
+  if (puzzleBoard.value[r][c] !== null) return // LOCKED
+  if (!selectedNumber.value) return
+
   board.value[r][c] = selectedNumber.value
+  checkGame()
 }
+
+checkGame()
 </script>
 <template>
   <div id="board" class="container">
@@ -41,19 +58,18 @@ function selectTile(r, c) {
         v-for="(cell, c) in row"
         :key="r + '-' + c"
         class="tile"
-        :id="r + '-' + c"
+        :class="{ puzzle: puzzleBoard[r][c] !== null }"
         @click="selectTile(r, c)"
       >
-        {{ cell !== 0 ? cell : '' }}
-        {{ puzzleBoard[r][c] }}
+        {{ cell ?? '' }} {{ puzzleBoard[r][c] }}
       </div>
     </div>
   </div>
+
   <div class="pNum">
     <div v-for="number in 9" :key="number" class="number" @click="selectNumber(number)">
       {{ number }}
     </div>
-    {{ selectedNumber }}
   </div>
 </template>
 <style scoped>
@@ -91,5 +107,11 @@ function selectTile(r, c) {
   width: 50px;
   height: 50px;
   border: 0.5px solid var(--clr-accent);
+}
+.puzzle {
+  text-align: center;
+  font-size: 30px;
+  cursor: pointer;
+  background-color: #96ade8;
 }
 </style>
